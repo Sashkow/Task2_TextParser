@@ -12,16 +12,8 @@ public class Parser {
 	ArrayList<String> wordsArray;
 	Map<String,Double> wordVovelnessMap;
 	ArrayList<String> sortedByVovelnessArray;
-	Map<String,Double> sortedByVovelnessMap;
 	
 	
-	public Map<String, Double> getSortedByVovelnessMap() {
-		return sortedByVovelnessMap;
-	}
-
-	public void setSortedByVovelnessMap(Map<String, Double> sortedByVovelnessMap) {
-		this.sortedByVovelnessMap = sortedByVovelnessMap;
-	}
 
 	public Parser(String text) {
 		this.text=text;
@@ -56,19 +48,13 @@ public class Parser {
 		splitByWords();
 		mapWords();	
 		sortByVovelness();
-		sortMapByVovelness();
 		
 		
 	}
 	
 	
 
-	private void sortMapByVovelness() {
-		HashMap<String,Double> map = new HashMap<String,Double>();
-        ValueComparator bvc =  new ValueComparator(map);
-        TreeMap<String,Double> sorted_map = new TreeMap<String,Double>(bvc);
-		
-	}
+	
 
 	private void sortByVovelness() {
 		 sortedByVovelnessArray=new ArrayList<String>(wordVovelnessMap.keySet());

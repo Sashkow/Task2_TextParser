@@ -1,10 +1,6 @@
 package main;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+
 
 import parser.Parser;
 
@@ -20,12 +16,12 @@ public class Main {
 		String text=ReaderFromTextFile.readFromFile();
 		Parser parser=new Parser(text);
 		System.out.println(parser.getText());
-		parser.doEverything();
+		parser.parce();
 		System.out.println("after");
-		System.out.println(parser.getText());
-		System.out.println(parser.getWordsArray());
-		System.out.println(parser.getWordVovelnessMap());
-		System.out.println(parser.getSortedByVovelnessArray());
+		System.out.println(parser.getText());// text without puncturation
+		System.out.println(parser.getWordsArray());// splited into words array
+		System.out.println(parser.getWordVovelnessMap());// mapped words to vovel letters percentage
+		System.out.println(parser.getSortedByVovelnessArray());// sorted by vovel percentage accending
 		
 		
 	}
