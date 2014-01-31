@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class ReaderFromTextFile {
-	public static String readFromFile(){
+	public static String readFromFile(String fileName){
 		try {
-			String text = new Scanner( new File(System.getProperty("user.dir")+"/programming.txt") ).useDelimiter("\\A").next();
+			String text = new Scanner( new File(System.getProperty("user.dir")+"/"+fileName) ).useDelimiter("\\A").next();
 			
 			return text.toString();
 		} catch (FileNotFoundException e) {

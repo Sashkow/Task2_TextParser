@@ -13,7 +13,7 @@ import reader.ReaderFromTextFile;
 public class Main {
 	
 	public static void main(String[] args) {
-		String text=ReaderFromTextFile.readFromFile();
+		String text=ReaderFromTextFile.readFromFile("programming.txt");
 		Parser parser=new Parser(text);
 		System.out.println(parser.getText());
 		parser.parce();

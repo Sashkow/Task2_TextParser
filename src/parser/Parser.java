@@ -9,9 +9,9 @@ import java.util.Map;
 
 public class Parser {
 	String text;
-	ArrayList<String> wordsArray;
-	Map<String,Double> wordVovelnessMap;
-	ArrayList<String> sortedByVovelnessArray;
+	ArrayList<Word> wordsArray;
+	Map<Word,Double> wordVovelnessMap;
+	ArrayList<Word> sortedByVovelnessArray;
 	
 	
 
@@ -27,19 +27,19 @@ public class Parser {
 		this.text = text;
 	}
 
-	public ArrayList<String> getWordsArray() {
+	public ArrayList<Word> getWordsArray() {
 		return wordsArray;
 	}
 
-	public void setWordsArray(ArrayList<String> wordsArray) {
+	public void setWordsArray(ArrayList<Word> wordsArray) {
 		this.wordsArray = wordsArray;
 	}
 
-	public Map<String, Double> getWordVovelnessMap() {
+	public Map<Word, Double> getWordVovelnessMap() {
 		return wordVovelnessMap;
 	}
 
-	public void setWordVovelnessMap(Map<String, Double> wordVovelnessMap) {
+	public void setWordVovelnessMap(Map<Word, Double> wordVovelnessMap) {
 		this.wordVovelnessMap = wordVovelnessMap;
 	}
 
@@ -57,10 +57,10 @@ public class Parser {
 	
 
 	private void sortByVovelness() {
-		 sortedByVovelnessArray=new ArrayList<String>(wordVovelnessMap.keySet());
-		 Collections.sort(sortedByVovelnessArray,new Comparator<String>() {
+		 sortedByVovelnessArray=new ArrayList<Word>(wordVovelnessMap.keySet());
+		 Collections.sort(sortedByVovelnessArray,new Comparator<Word>() {
 			 @Override
-			public int compare(String o1, String o2) {
+			public int compare(Word o1, Word o2) {
 				 if (wordVovelnessMap.get(o1)<wordVovelnessMap.get(o2))
 					 return -1;
 				 if (wordVovelnessMap.get(o1)==wordVovelnessMap.get(o2))
@@ -78,36 +78,36 @@ public class Parser {
 
 	private void splitByWords() {
 		String[] array=text.split(" ");
-		wordsArray=new ArrayList<String>(Arrays.asList(array));
+		
+		wordsArray=new ArrayList<Word>();
+		
+		for (String s:array){
+			wordsArray.add(new Word(s));
+		}
 	}
 
 	private void mapWords() {
-		wordVovelnessMap=new HashMap<String, Double>();
-		for (String word:wordsArray){
+		wordVovelnessMap=new HashMap<Word, Double>();
+		for (Word word:wordsArray){
 			if (!wordVovelnessMap.containsKey(word)){
 				wordVovelnessMap.put(word, countVovelness(word));
 			}
 		}
 	}
 
-	private Double countVovelness(String word) {
+	private Double countVovelness(Word word) {
 		Integer vovelsAmount=0;
-		for (char ch:word.toCharArray()){
-			if (isVovel(ch)){
+		Letter l;
+		for (char ch:word.getActualString().toCharArray()){
+			l =new Letter(ch);
+			if (l.isVovel()){
 				vovelsAmount++;
 			}
 		}
-		return (double)vovelsAmount/(double)word.length();
+		return (double)vovelsAmount/(double)word.getActualString().length();
 	}
 
-	private boolean isVovel(char c) {
-		if(c=='a' || c=='A' || c=='e' || c=='E' || c=='i' || c=='I' || c=='o' || c=='O' || c=='u' || c=='U')
-			return true;
-		//а, е, и, і, о, у є, ю, я ї
-		if(c=='а' || c=='е' || c=='и' || c=='і' || c=='о' || c=='у' || c=='є' || c=='ю' || c=='я' || c=='ї')
-			return true;
-	    return false;
-	}
+	
 	
 	
 
@@ -137,11 +137,11 @@ public class Parser {
 		
 	}
 
-	public ArrayList<String> getSortedByVovelnessArray() {
+	public ArrayList<Word> getSortedByVovelnessArray() {
 		return sortedByVovelnessArray;
 	}
 
-	public void setSortedByVovelnessArray(ArrayList<String> sortedByVovelnessArray) {
+	public void setSortedByVovelnessArray(ArrayList<Word> sortedByVovelnessArray) {
 		this.sortedByVovelnessArray = sortedByVovelnessArray;
 	}
 
